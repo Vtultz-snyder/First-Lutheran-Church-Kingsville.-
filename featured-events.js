@@ -177,7 +177,8 @@
 
   function scheduleFeaturedEvents() {
     window.setTimeout(addFeaturedEvents, 900);
-    window.setTimeout(applyContentFixes, 1200);
+    // Re-run content fixes a few times to catch elements that animate in after load.
+    [600, 1200, 2500, 4000].forEach(function (d) { window.setTimeout(applyContentFixes, d); });
   }
 
   if (document.readyState === 'complete') {
