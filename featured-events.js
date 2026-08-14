@@ -165,10 +165,16 @@
           'Our worship includes hymns and songs led by our worship band, with congregational singing that unites voices in praise.');
         if (nv !== v) node.nodeValue = nv;
       });
-      // Community use: remove the FunFit4Youth entries (moving out of the basement)
+      // Community use: remove CoDA and FunFit4Youth (both moving out of the basement)
+      var COMMUNITY_REMOVE = /FunFit4Youth|Co-?Dependency|CoDA/i;
+      // Small list-item rows (icon + label)
+      Array.prototype.forEach.call(document.querySelectorAll('div.flex.gap-3, li'), function (row) {
+        if (COMMUNITY_REMOVE.test(row.textContent) && row.textContent.trim().length < 80 && row.parentElement) row.remove();
+      });
+      // Full group cards keyed by their heading
       Array.prototype.forEach.call(document.querySelectorAll('h3, h4'), function (h) {
-        if (/FunFit4Youth/i.test(h.textContent)) {
-          var card = h.closest('article') || h.closest('[class*="rounded"]') || h.closest('li') || h.parentElement;
+        if (COMMUNITY_REMOVE.test(h.textContent) && h.textContent.trim().length < 80) {
+          var card = h.closest('div[class*="rounded"]') || h.closest('article') || h.closest('li');
           if (card && card !== document.body && card.parentElement) card.remove();
         }
       });
