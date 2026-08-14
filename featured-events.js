@@ -163,6 +163,12 @@
         // Worship music: worship band, no organ
         nv = nv.replace(/Our service includes traditional hymns led by piano and organ, with congregational singing that unites voices in praise\./,
           'Our worship includes hymns and songs led by our worship band, with congregational singing that unites voices in praise.');
+        // No choir, so the heading reflects the worship band
+        nv = nv.replace('Music & Choir', 'Music & Worship');
+        // Weave the worship band into the church's story (About page)
+        if (v.indexOf('Our story begins in') >= 0 && v.indexOf('worship band') < 0) {
+          nv = nv + ' Today, our worship is led by a worship band, with congregational singing that unites our voices in praise.';
+        }
         if (nv !== v) node.nodeValue = nv;
       });
       // Community use: remove CoDA and FunFit4Youth (both moving out of the basement)
