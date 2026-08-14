@@ -41,36 +41,51 @@
     `;
     document.head.appendChild(style);
 
+    // Always add the Facebook footer links, regardless of upcoming events.
+    addFooterFacebookLinks(footer);
+
+    // Featured events, newest newsletter first. Each stays visible only until its date passes
+    // (iso = YYYY-MM-DD). Add or update entries here; past ones drop off automatically.
+    var FEATURED = [
+      { kicker: 'Worship together', title: 'VENVI Worship Service', iso: '2026-08-23',
+        dateLabel: 'Sunday, August 23 · 2:00 PM',
+        desc: 'Join us for a special afternoon worship service at First Lutheran Church.',
+        link: '/calendar-events/#venvi-worship-august', linkLabel: 'View church calendar' },
+      { kicker: 'Community event', title: 'Food for All Community Luncheon', iso: '2026-09-16',
+        dateLabel: 'Wednesday, September 16 · Roma Club, Leamington',
+        desc: 'Save the date for the annual Southwestern Ontario Gleaners community luncheon.',
+        link: '/calendar-events/#food-for-all-luncheon', linkLabel: 'See event details' }
+    ];
+    var todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Toronto' });
+    var upcoming = FEATURED.filter(function (ev) { return ev.iso >= todayStr; }).slice(0, 2);
+    if (!upcoming.length) return; // nothing upcoming: skip the banner entirely
+
+    var cards = upcoming.map(function (ev) {
+      return '<article class="flc-event-card">' +
+        '<p class="flc-event-kicker">' + ev.kicker + '</p>' +
+        '<h3>' + ev.title + '</h3>' +
+        '<p class="flc-event-date">' + ev.dateLabel + '</p>' +
+        '<p>' + ev.desc + '</p>' +
+        '<a class="flc-event-link" href="' + ev.link + '">' + ev.linkLabel + '</a>' +
+      '</article>';
+    }).join('');
+
     var section = document.createElement('section');
     section.id = 'flc-featured-events';
     section.setAttribute('aria-labelledby', 'flc-featured-heading');
-    section.innerHTML = `
-      <div class="flc-event-banner">
-        <div class="flc-event-shade" aria-hidden="true"></div>
-        <div class="flc-event-content">
-          <div class="flc-event-intro">
-            <p class="flc-event-kicker">Featured events</p>
-            <h2 class="flc-event-title" id="flc-featured-heading">Coming up</h2>
-          </div>
-          <article class="flc-event-card">
-            <p class="flc-event-kicker">Worship together</p>
-            <h3>VENVI Worship Service</h3>
-            <p class="flc-event-date">Sunday, July 26 · 2:00 PM</p>
-            <p>Join us for a special afternoon worship service at First Lutheran Church.</p>
-            <a class="flc-event-link" href="/calendar-events/">View church calendar</a>
-          </article>
-          <article class="flc-event-card">
-            <p class="flc-event-kicker">Community volunteer event</p>
-            <h3>Hogs for Hospice Ride Support</h3>
-            <p class="flc-event-date">Saturday, August 1 · about 10:30 AM–1:30 PM</p>
-            <p>Help welcome the registered ride and support traffic flow in Wheatley.</p>
-            <a class="flc-event-link" href="/calendar-events/#hogs-for-hospice">See event details</a>
-          </article>
-        </div>
-      </div>`;
+    section.innerHTML =
+      '<div class="flc-event-banner">' +
+        '<div class="flc-event-shade" aria-hidden="true"></div>' +
+        '<div class="flc-event-content">' +
+          '<div class="flc-event-intro">' +
+            '<p class="flc-event-kicker">Featured events</p>' +
+            '<h2 class="flc-event-title" id="flc-featured-heading">Coming up</h2>' +
+          '</div>' +
+          cards +
+        '</div>' +
+      '</div>';
 
     footer.parentNode.insertBefore(section, footer);
-    addFooterFacebookLinks(footer);
   }
 
   function addFooterFacebookLinks(footer) {

@@ -31,16 +31,6 @@
       details: '<strong>July 4, 11, 18 & 25</strong><br>9:45–11:00 AM<br>Church Basement'
     },
     {
-      id: 'karen-p-july',
-      category: 'Church Calendar',
-      date: 'July 8, 10 & 22',
-      title: 'Karen P',
-      image: '/images/Tea Event/_MG_5509.webp',
-      alt: 'A welcoming church fellowship table',
-      summary: 'Reserved gathering times in the basement and kitchen.',
-      details: '<strong>Wednesday, July 8; Friday, July 10; Wednesday, July 22</strong><br>11:00 AM–2:00 PM<br>Church Basement & Kitchen'
-    },
-    {
       id: 'greeter-meeting-july',
       category: 'Congregational Life',
       date: 'Sunday, July 5',
@@ -180,14 +170,22 @@
     `;
     document.head.appendChild(style);
 
+    // Church-local (Eastern) date as YYYY-MM-DD, so past events fall off automatically.
+    var todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Toronto' });
+    var visibleEvents = (MONTH_DATA.events || []).filter(function (event) {
+      return !event.end || event.end >= todayStr;
+    });
+    // Heading month always reflects the current month, no manual edit needed.
+    var dynamicMonthLabel = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'America/Toronto' }) + ' Highlights';
+
     upcoming.id = 'flc-monthly-highlights';
     upcoming.innerHTML = '<div class="flc-month-wrap">' +
       '<header class="flc-month-head">' +
-        '<span class="flc-month-kicker">' + MONTH_DATA.monthLabel + '</span>' +
+        '<span class="flc-month-kicker">' + dynamicMonthLabel + '</span>' +
         '<h2>Upcoming Events</h2>' +
         '<p>' + MONTH_DATA.intro + '</p>' +
       '</header>' +
-      '<div class="flc-month-grid">' + MONTH_DATA.events.map(eventCard).join('') + '</div>' +
+      '<div class="flc-month-grid">' + visibleEvents.map(eventCard).join('') + '</div>' +
     '</div>';
 
     following.forEach(function (section) { section.remove(); });
