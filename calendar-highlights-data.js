@@ -45,7 +45,7 @@ window.FLC_MONTHLY_HIGHLIGHTS = {
     },
     {
       id: 'food-for-all-luncheon', category: 'Featured Community Event', date: 'Wednesday, September 16', end: '2026-09-16',
-      title: 'Food for All Community Luncheon', image: '/images/Tea Event/_MG_5509.webp', alt: 'A welcoming church fellowship table',
+      title: 'Food for All Community Luncheon', image: '/images/events/june-crops/gleaners-food-box.jpg', alt: 'A box of fresh produce and pantry food from the Gleaners',
       summary: 'Save the date for the annual Southwestern Ontario Gleaners community luncheon.',
       details: '<strong>Wednesday, September 16</strong><br>Roma Club, Leamington<br><br>An annual luncheon celebrating the work of the Southwestern Ontario Gleaners. More details and ticket information coming soon.'
     }

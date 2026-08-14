@@ -38,6 +38,30 @@
       @media (prefers-reduced-motion: reduce) {
         .flc-facebook-link { transition: none; }
       }
+      /* --- Mobile/tablet nav fixes: real 3-line hamburger + larger logo --- */
+      header button[aria-label="Toggle menu"] > span,
+      header button[aria-label="Toggle menu"] > svg { opacity: 0 !important; }
+      header button[aria-label="Toggle menu"]::before {
+        content: ""; position: absolute; left: 50%; top: 50%;
+        width: 20px; height: 14px; transform: translate(-50%, -50%);
+        background:
+          linear-gradient(currentColor, currentColor) left top / 20px 2px no-repeat,
+          linear-gradient(currentColor, currentColor) left center / 20px 2px no-repeat,
+          linear-gradient(currentColor, currentColor) left bottom / 20px 2px no-repeat;
+      }
+      header button[aria-label="Toggle menu"][aria-expanded="true"]::before {
+        width: 22px; height: 22px;
+        background: linear-gradient(currentColor, currentColor) center / 22px 2px no-repeat;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      header button[aria-label="Toggle menu"][aria-expanded="true"]::after {
+        content: ""; position: absolute; left: 50%; top: 50%;
+        width: 22px; height: 2px; background: currentColor;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      @media (max-width: 1024px) {
+        header a[href="/"] img { height: 52px !important; width: auto !important; }
+      }
     `;
     document.head.appendChild(style);
 
