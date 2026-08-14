@@ -144,8 +144,40 @@
     copyrightRow.parentElement.insertBefore(social, copyrightRow);
   }
 
+  // Becky's review content fixes (Aug 2026), applied after hydration.
+  function applyContentFixes() {
+    try {
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+      var nodes = [], n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      nodes.forEach(function (node) {
+        var v = node.nodeValue;
+        if (!v || !v.trim()) return;
+        var nv = v;
+        // Founding year: congregation born 1942 (not 1947)
+        nv = nv.replace(/\b1947\b/g, '1942').replace(/over 75 years/g, 'over 80 years');
+        // Communion: closed communion, dates announced in advance (not 1st & 3rd Sundays)
+        nv = nv.replace('1st & 3rd Sundays', 'Announced in advance');
+        nv = nv.replace(/We celebrate the Lord.s Supper on the first and third Sundays of each month, and on festival days\. All baptized believers in Christ are welcome to receive\./,
+          'We practice closed communion, and our communion service dates are announced in advance. If you would like to commune with us, please speak with our leadership beforehand.');
+        // Worship music: worship band, no organ
+        nv = nv.replace(/Our service includes traditional hymns led by piano and organ, with congregational singing that unites voices in praise\./,
+          'Our worship includes hymns and songs led by our worship band, with congregational singing that unites voices in praise.');
+        if (nv !== v) node.nodeValue = nv;
+      });
+      // Community use: remove the FunFit4Youth entries (moving out of the basement)
+      Array.prototype.forEach.call(document.querySelectorAll('h3, h4'), function (h) {
+        if (/FunFit4Youth/i.test(h.textContent)) {
+          var card = h.closest('article') || h.closest('[class*="rounded"]') || h.closest('li') || h.parentElement;
+          if (card && card !== document.body && card.parentElement) card.remove();
+        }
+      });
+    } catch (e) { /* no-op */ }
+  }
+
   function scheduleFeaturedEvents() {
     window.setTimeout(addFeaturedEvents, 900);
+    window.setTimeout(applyContentFixes, 1200);
   }
 
   if (document.readyState === 'complete') {
