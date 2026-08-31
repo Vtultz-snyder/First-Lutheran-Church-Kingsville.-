@@ -144,53 +144,8 @@
     copyrightRow.parentElement.insertBefore(social, copyrightRow);
   }
 
-  // Becky's review content fixes (Aug 2026), applied after hydration.
-  function applyContentFixes() {
-    try {
-      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-      var nodes = [], n;
-      while ((n = walker.nextNode())) nodes.push(n);
-      nodes.forEach(function (node) {
-        var v = node.nodeValue;
-        if (!v || !v.trim()) return;
-        var nv = v;
-        // Founding year: congregation born 1942 (not 1947)
-        nv = nv.replace(/\b1947\b/g, '1942').replace(/over 75 years/g, 'over 80 years');
-        // Communion: closed communion, dates announced in advance (not 1st & 3rd Sundays)
-        nv = nv.replace('1st & 3rd Sundays', 'Announced in advance');
-        nv = nv.replace(/We celebrate the Lord.s Supper on the first and third Sundays of each month, and on festival days\. All baptized believers in Christ are welcome to receive\./,
-          'We practice closed communion, and our communion service dates are announced in advance. If you would like to commune with us, please speak with our leadership beforehand.');
-        // Worship music: worship band, no organ
-        nv = nv.replace(/Our service includes traditional hymns led by piano and organ, with congregational singing that unites voices in praise\./,
-          'Our worship includes hymns and songs led by our worship band, with congregational singing that unites voices in praise.');
-        // No choir, so the heading reflects the worship band
-        nv = nv.replace('Music & Choir', 'Music & Worship');
-        // Weave the worship band into the church's story (About page)
-        if (v.indexOf('Our story begins in') >= 0 && v.indexOf('worship band') < 0) {
-          nv = nv + ' Today, our worship is led by a worship band, with congregational singing that unites our voices in praise.';
-        }
-        if (nv !== v) node.nodeValue = nv;
-      });
-      // Community use: remove CoDA and FunFit4Youth (both moving out of the basement)
-      var COMMUNITY_REMOVE = /FunFit4Youth|Co-?Dependency|CoDA/i;
-      // Small list-item rows (icon + label)
-      Array.prototype.forEach.call(document.querySelectorAll('div.flex.gap-3, li'), function (row) {
-        if (COMMUNITY_REMOVE.test(row.textContent) && row.textContent.trim().length < 80 && row.parentElement) row.remove();
-      });
-      // Full group cards keyed by their heading
-      Array.prototype.forEach.call(document.querySelectorAll('h3, h4'), function (h) {
-        if (COMMUNITY_REMOVE.test(h.textContent) && h.textContent.trim().length < 80) {
-          var card = h.closest('div[class*="rounded"]') || h.closest('article') || h.closest('li');
-          if (card && card !== document.body && card.parentElement) card.remove();
-        }
-      });
-    } catch (e) { /* no-op */ }
-  }
-
   function scheduleFeaturedEvents() {
     window.setTimeout(addFeaturedEvents, 900);
-    // Re-run content fixes a few times to catch elements that animate in after load.
-    [600, 1200, 2500, 4000].forEach(function (d) { window.setTimeout(applyContentFixes, d); });
   }
 
   if (document.readyState === 'complete') {
