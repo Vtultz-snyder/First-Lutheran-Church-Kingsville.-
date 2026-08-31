@@ -7,8 +7,8 @@
 
     var style = document.createElement('style');
     style.textContent = `
-      #flc-featured-events { position: relative; z-index: 30; margin: 0 auto -3.25rem; padding: 0 1rem; max-width: 80rem; }
-      .flc-event-banner { position: relative; min-height: 22rem; overflow: hidden; border-radius: 1.5rem; color: #fff; box-shadow: 0 24px 60px rgba(4, 24, 48, .28); background: #0a2947 url('/images/events/july-featured-events.png') center/cover no-repeat; }
+      #flc-featured-events { position: relative; z-index: 30; margin: 0 0 -3.25rem; padding: 2.5rem 1rem 0; max-width: none; width: 100%; align-self: stretch; background: #1f2933; }
+      .flc-event-banner { max-width: 80rem; margin-left: auto; margin-right: auto; position: relative; min-height: 22rem; overflow: hidden; border-radius: 1.5rem; color: #fff; box-shadow: 0 24px 60px rgba(4, 24, 48, .28); background: #0a2947 url('/images/events/july-featured-events.png') center/cover no-repeat; }
       .flc-event-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4, 24, 48, .92) 0%, rgba(4, 24, 48, .67) 48%, rgba(4, 24, 48, .9) 100%); }
       .flc-event-content { position: relative; display: grid; grid-template-columns: .75fr 1fr 1fr; gap: 1.2rem; align-items: stretch; min-height: 22rem; padding: 2rem; }
       .flc-event-intro { align-self: center; }
@@ -20,7 +20,7 @@
       .flc-event-date { color: #f5c76e !important; font-weight: 800; }
       .flc-event-link { display: inline-flex; margin-top: .75rem; color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: .25rem; }
       @media (max-width: 820px) {
-        #flc-featured-events { margin-bottom: -2rem; }
+        #flc-featured-events { margin-bottom: -2rem; padding-top: 1.75rem; }
         .flc-event-content { grid-template-columns: 1fr; padding: 1.25rem; }
         .flc-event-title { max-width: none; }
         .flc-event-banner { min-height: 0; }
@@ -132,7 +132,7 @@
           <span class="flc-facebook-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M14 8.5V6.8c0-.8.5-1 1-1h2.6V2.1L14.5 2C11.1 2 10 4.1 10 6.3v2.2H7v4h3V22h4v-9.5h3.2l.5-4H14Z"/></svg></span>
           <span>First Lutheran Church</span>
         </a>
-        <a class="flc-facebook-link" href="https://www.facebook.com/profile.php?id=61576675765454" target="_blank" rel="noopener noreferrer" aria-label="The GYM — God’s Youth Ministry on Facebook" title="Youth Ministry Facebook">
+        <a class="flc-facebook-link" href="https://www.facebook.com/profile.php?id=61576675765454" target="_blank" rel="noopener noreferrer" aria-label="The GYM, God’s Youth Ministry on Facebook" title="Youth Ministry Facebook">
           <span class="flc-facebook-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M14 8.5V6.8c0-.8.5-1 1-1h2.6V2.1L14.5 2C11.1 2 10 4.1 10 6.3v2.2H7v4h3V22h4v-9.5h3.2l.5-4H14Z"/></svg></span>
           <span>Youth Ministry</span>
         </a>

@@ -8,7 +8,7 @@
       image: '/images/events/june-crops/venvi-cross-bible.jpg',
       alt: 'An open Bible beside a cross',
       summary: 'Three Monday opportunities to learn, pray, and grow together.',
-      details: '<strong>July 6, 13, 20 & 27</strong><br>Bible Study · 9:30–10:30 AM · Pastor’s Room<br>Prayer Group · 11:00 AM · Pastor’s Room<br>WOW Bible Study · 7:00 PM · Balcony'
+      details: '<strong>July 6, 13, 20 & 27</strong><br>Bible Study · 9:30-10:30 AM · Pastor’s Room<br>Prayer Group · 11:00 AM · Pastor’s Room<br>WOW Bible Study · 7:00 PM · Balcony'
     },
     {
       id: 'july-coda',
@@ -18,17 +18,17 @@
       image: '/images/Health and Care Ministry/elder-hand-held-care.jpeg',
       alt: 'Supportive hands held together',
       summary: 'Weekly Tuesday evening meetings in the church basement.',
-      details: '<strong>July 7, 14, 21 & 28</strong><br>7:00–9:00 PM<br>Church Basement'
+      details: '<strong>July 7, 14, 21 & 28</strong><br>7:00-9:00 PM<br>Church Basement'
     },
     {
       id: 'fit-for-christ-july',
       category: 'Health & Fellowship',
       date: 'Saturdays in July',
-      title: 'Fit for Christ — Zumba',
+      title: 'Fit for Christ: Zumba',
       image: '/images/events/june-named/zumba-dance.jpg',
       alt: 'Fit for Christ Zumba and dance class',
       summary: 'Saturday morning movement, fellowship, and encouragement.',
-      details: '<strong>July 4, 11, 18 & 25</strong><br>9:45–11:00 AM<br>Church Basement'
+      details: '<strong>July 4, 11, 18 & 25</strong><br>9:45-11:00 AM<br>Church Basement'
     },
     {
       id: 'greeter-meeting-july',
@@ -58,7 +58,7 @@
       image: '/images/events/july-featured-events.png',
       alt: 'Community volunteers welcoming a summer charity motorcycle ride',
       summary: 'Volunteer with First Lutheran to welcome the registered ride in Wheatley.',
-      details: '<strong>Saturday, August 1</strong><br>Approximately 10:30 AM–1:30 PM<br>Wheatley<br><br>Volunteers will help welcome the riders and support traffic flow. This August 1 event is featured in the July newsletter so members have time to plan.'
+      details: '<strong>Saturday, August 1</strong><br>Approximately 10:30 AM-1:30 PM<br>Wheatley<br><br>Volunteers will help welcome the riders and support traffic flow. This August 1 event is featured in the July newsletter so members have time to plan.'
     }
   ];
   var MONTH_DATA = window.FLC_MONTHLY_HIGHLIGHTS || {
@@ -115,13 +115,6 @@
       return heading && heading.textContent.trim() === 'Upcoming Events';
     });
     if (!upcoming) return;
-
-    var following = [];
-    var cursor = upcoming.nextElementSibling;
-    while (cursor && cursor.tagName === 'SECTION' && following.length < 2) {
-      following.push(cursor);
-      cursor = cursor.nextElementSibling;
-    }
 
     var style = document.createElement('style');
     style.textContent = `
@@ -188,7 +181,6 @@
       '<div class="flc-month-grid">' + visibleEvents.map(eventCard).join('') + '</div>' +
     '</div>';
 
-    following.forEach(function (section) { section.remove(); });
     window.addEventListener('hashchange', function () { openHashEvent(true); });
     openHashEvent(true);
   }
