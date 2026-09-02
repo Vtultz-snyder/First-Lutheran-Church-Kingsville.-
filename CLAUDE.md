@@ -79,7 +79,13 @@ have already caused confusion. Never append `/app/` to it, that path is a 404.
 
 ## Still open
 
-- September newsletter needs adding to `calendar-highlights-data.js`
+- Newsletter prints `lutheranchurchkingsville.com`, which has no DNS record at all.
+  The old Wix site is at `kingsvillelutheran.church` (and still says 10:15 am).
+  Becky/Ilene need the right address in the next newsletter.
+- Sunday School is on pause this fall. Public pages now say so. Jennifer and
+  Pamela are still named, matching the newsletter. Ask Becky if that should go neutral.
+- No news page exists, so monthly items with no home (births, Food Bank moving to
+  the Lions Hall, Anchor Youth Centre updates, volunteer calls) have nowhere to go.
 - Confirm "Erie Migration District School" with Austin (he wrote "High School")
 - GYM grades 9-12 wording, pending Sue Nurse
 - Lunch ministry photos from Austin
