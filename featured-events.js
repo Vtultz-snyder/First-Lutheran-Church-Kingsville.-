@@ -71,14 +71,18 @@
     // Featured events, newest newsletter first. Each stays visible only until its date passes
     // (iso = YYYY-MM-DD). Add or update entries here; past ones drop off automatically.
     var FEATURED = [
-      { kicker: 'Worship together', title: 'VENVI Worship Service', iso: '2026-08-23',
-        dateLabel: 'Sunday, August 23 · 2:00 PM',
-        desc: 'Join us for a special afternoon worship service at First Lutheran Church.',
-        link: '/calendar-events/#venvi-worship-august', linkLabel: 'View church calendar' },
+      { kicker: 'Worship together', title: 'Back to School Prayer Focus', iso: '2026-09-06',
+        dateLabel: 'Sunday, September 6 · 10:00 AM',
+        desc: 'We pray for students, teachers, and families as the new school year begins.',
+        link: '/calendar-events/#back-to-school-prayer', linkLabel: 'View church calendar' },
       { kicker: 'Community event', title: 'Food for All Community Luncheon', iso: '2026-09-16',
         dateLabel: 'Wednesday, September 16 · Roma Club, Leamington',
-        desc: 'Save the date for the annual Southwestern Ontario Gleaners community luncheon.',
-        link: '/calendar-events/#food-for-all-luncheon', linkLabel: 'See event details' }
+        desc: 'The annual Southwestern Ontario Gleaners community luncheon. Tickets $15.00 online.',
+        link: '/calendar-events/#food-for-all-luncheon', linkLabel: 'See event details' },
+      { kicker: 'Worship together', title: 'VENVI Worship Service', iso: '2026-09-27',
+        dateLabel: 'Sunday, September 27 · 2:00 PM',
+        desc: 'A Sunday afternoon worship service at VENVI (Chartwell) Kingsville.',
+        link: '/calendar-events/#venvi-worship-september', linkLabel: 'View church calendar' }
     ];
     var todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Toronto' });
     var upcoming = FEATURED.filter(function (ev) { return ev.iso >= todayStr; }).slice(0, 2);
