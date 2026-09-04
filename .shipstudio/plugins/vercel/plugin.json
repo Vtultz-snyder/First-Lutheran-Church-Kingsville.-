@@ -1,0 +1,8 @@
+{
+  "id": "vercel",
+  "name": "Vercel",
+  "version": "1.0.0",
+  "description": "Deploy to Vercel directly from Ship Studio",
+  "author": "Ship Studio",
+  "slots": ["toolbar"]
+}

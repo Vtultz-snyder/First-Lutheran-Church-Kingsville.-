@@ -1,0 +1,12 @@
+{
+  "id": "google-analytics",
+  "name": "Google Analytics",
+  "version": "0.1.0",
+  "description": "Inject GA4 tracking code and view analytics data directly in Ship Studio",
+  "slots": ["toolbar"],
+  "author": "Ship Studio",
+  "min_app_version": "0.3.53",
+  "icon": "",
+  "required_commands": [],
+  "api_version": 1
+}

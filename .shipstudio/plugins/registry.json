@@ -1,0 +1,49 @@
+{
+  "plugins": [
+    {
+      "plugin_id": "vercel",
+      "enabled": true,
+      "installed_at": 1777482349138,
+      "source_url": "https://github.com/ship-studio/plugin-vercel",
+      "installed_commit": "d4324aab9d7366cd5e9e484bfc90e8e81052498f",
+      "is_dev": false,
+      "local_path": ""
+    },
+    {
+      "plugin_id": "google-analytics",
+      "enabled": true,
+      "installed_at": 1777570524903,
+      "source_url": "https://github.com/ship-studio/plugin-ga",
+      "installed_commit": "8cdab1407341a9708356a567ed7dc35974b9aa9a",
+      "is_dev": false,
+      "local_path": ""
+    },
+    {
+      "plugin_id": "sanity-cms",
+      "enabled": true,
+      "installed_at": 1777570532820,
+      "source_url": "https://github.com/ship-studio/plugin-sanity",
+      "installed_commit": "8aa5dc348acd0c9405008ff9d4d26740fad60b78",
+      "is_dev": false,
+      "local_path": ""
+    },
+    {
+      "plugin_id": "brand-guidelines",
+      "enabled": true,
+      "installed_at": 1777570554112,
+      "source_url": "https://github.com/ship-studio/plugin-brand-guidelines",
+      "installed_commit": "7c42452e68a1628988e2877dd5a59801bda6d50a",
+      "is_dev": false,
+      "local_path": ""
+    },
+    {
+      "plugin_id": "plugin-ccusage",
+      "enabled": true,
+      "installed_at": 1777570570979,
+      "source_url": "https://github.com/ship-studio/plugin-ccusage",
+      "installed_commit": "7c185c664c1142e9b70d150a6c47ec55f83ba93f",
+      "is_dev": false,
+      "local_path": ""
+    }
+  ]
+}
