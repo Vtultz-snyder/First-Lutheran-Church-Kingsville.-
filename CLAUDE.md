@@ -45,6 +45,22 @@ Photos live in the `p=[...]` array in the About bundle plus matching slides in
 and the red caption appears on its own. Leave it empty and no caption shows.
 Do not put "Date unknown" back.
 
+## Giving links
+
+There is exactly **one** donation destination on this site:
+
+    https://pushpay.com/g/lutheranchurchkingsville
+
+It loads as "Give to First LC Kingsville". Every Give and Give Online button
+uses it, in the nav, the mobile menu, and twice in the footer.
+
+Do not add a second destination. Until 4 Sep 2026 the gold footer button linked
+to `canadahelps.org/en/dn/35651`, which is **Arts Council Windsor & Region**, so
+donations started from it went to another charity on all eleven pages. There is
+no CanadaHelps listing for First Lutheran Kingsville. If the church ever sets one
+up, get the exact URL from Austin and confirm the charity name on the page before
+using it.
+
 ## Writing rules
 
 **No long dashes. Ever.** No em dashes and no en dashes, including in number and
