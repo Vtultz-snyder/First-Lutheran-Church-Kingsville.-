@@ -1,6 +1,7 @@
 # First Lutheran Church Kingsville - website
 
-Live: https://first-lutheran-kingsville.vercel.app
+Live: **https://kingsvillelutheran.church** (and www), on Cloudflare since 15 Sep 2026.
+Old preview, not yet retired: https://first-lutheran-kingsville.vercel.app
 Branch: `august-2026-update` (this is the real one, `main` is a dead June snapshot)
 
 ## Read this before changing any text
@@ -69,21 +70,22 @@ as a tell that text was AI-written. `check-site.sh` fails the build if one appea
 
 ## Deploying
 
-Two hosts during the move. Both are plain static uploads, no build step.
+The church domain is served by Cloudflare. Vercel still has a copy until it is retired.
+Both are plain static uploads, no build step.
 **Do not add a `vercel.json` with a `buildCommand`.** One existed with `next build`
 in it, and since there is no source to build, it failed every production deploy on 14 Aug.
 
 ```bash
 git add -A && git commit -m "..." && git push origin august-2026-update
 npx vercel deploy --prod --yes          # Vercel, current live preview
-./deploy-cloudflare.sh                  # Cloudflare, where the church domain is going
+./deploy-cloudflare.sh                  # Cloudflare, serves kingsvillelutheran.church
 ```
 
 Then check both, in a real browser:
 
 ```bash
-./check-site.sh live
-./check-site.sh https://first-lutheran-kingsville.victoria-tultz.workers.dev
+./check-site.sh https://kingsvillelutheran.church
+./check-site.sh live   # the old Vercel copy, until retired
 ```
 
 ### Cloudflare notes (set up 15 Sep 2026)
@@ -106,7 +108,7 @@ Vercel. Until 15 Sep 2026 Vercel was serving this file publicly, phone number in
 
 ## Sharing the link
 
-Send **https://first-lutheran-kingsville.vercel.app** and nothing else. Preview
+Send **https://kingsvillelutheran.church** and nothing else. Preview
 URLs like `first-lutheran-kingsville-h4nxbqwbo.vercel.app` expire from view and
 have already caused confusion. Never append `/app/` to it, that path is a 404.
 
@@ -129,4 +131,4 @@ have already caused confusion. Never append `/app/` to it, that path is a 404.
 - Confirm "Erie Migration District School" with Austin (he wrote "High School")
 - GYM grades 9-12 wording, pending Sue Nurse
 - Lunch ministry photos from Austin
-- DNS cutover: Board approved 9 Sep 2026. Zone added to Cloudflare 15 Sep 2026 (records imported, all set DNS only, pending). Move kingsvillelutheran.church nameservers from GoDaddy (ns33/ns34.domaincontrol.com) to Cloudflare daisy.ns.cloudflare.com + ernest.ns.cloudflare.com on a call with Austin (his account, 2FA). Current records: apex A 185.230.63.107 (Wix), www CNAME pointing.wixdns.net, _dmarc TXT, no MX.
+- DNS cutover DONE 15 Sep 2026. Nameservers at GoDaddy now daisy/ernest.ns.cloudflare.com (registrar still GoDaddy, Austin's account). Old Wix A and www CNAME deleted in Cloudflare; the Worker owns both hostnames via `routes` in wrangler.jsonc. Kept `_dmarc` TXT and `_domainconnect` CNAME. Still to do: turn on Always Use HTTPS in Cloudflare, retire the Vercel project, cancel Wix if it is paid, decide whether the GitHub repo should be private.
