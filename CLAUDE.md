@@ -129,4 +129,4 @@ have already caused confusion. Never append `/app/` to it, that path is a 404.
 - Confirm "Erie Migration District School" with Austin (he wrote "High School")
 - GYM grades 9-12 wording, pending Sue Nurse
 - Lunch ministry photos from Austin
-- DNS cutover: Board approved 9 Sep 2026. Move kingsvillelutheran.church nameservers from GoDaddy (ns33/ns34.domaincontrol.com) to Cloudflare on a call with Austin (his account, 2FA). Current records: apex A 185.230.63.107 (Wix), www CNAME pointing.wixdns.net, _dmarc TXT, no MX.
+- DNS cutover: Board approved 9 Sep 2026. Zone added to Cloudflare 15 Sep 2026 (records imported, all set DNS only, pending). Move kingsvillelutheran.church nameservers from GoDaddy (ns33/ns34.domaincontrol.com) to Cloudflare daisy.ns.cloudflare.com + ernest.ns.cloudflare.com on a call with Austin (his account, 2FA). Current records: apex A 185.230.63.107 (Wix), www CNAME pointing.wixdns.net, _dmarc TXT, no MX.
