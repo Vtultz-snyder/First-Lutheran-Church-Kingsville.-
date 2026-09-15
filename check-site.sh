@@ -5,6 +5,7 @@
 #
 #   ./check-site.sh          checks this folder (via a temporary local server)
 #   ./check-site.sh live     checks https://first-lutheran-kingsville.vercel.app
+#   ./check-site.sh https://...  checks any other copy, e.g. the Cloudflare workers.dev link
 #
 # Exit code 0 = clean, 1 = problems found.
 
@@ -21,6 +22,9 @@ trap 'rm -rf "$TMP"; [ -n "${SRV:-}" ] && kill "$SRV" 2>/dev/null' EXIT
 if [ "${1:-local}" = "live" ]; then
   BASE="https://first-lutheran-kingsville.vercel.app"
   echo "Checking LIVE: $BASE"
+elif [[ "${1:-}" == https://* ]]; then
+  BASE="${1%/}"
+  echo "Checking URL: $BASE"
 else
   PORT=8811
   python3 -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 &
@@ -109,7 +113,7 @@ if BASE.startswith("http://127.0.0.1") or BASE.startswith("https://"):
     for r in sorted(refs):
         u = BASE + urllib.parse.quote(r)
         try:
-            code = urllib.request.urlopen(urllib.request.Request(u, method="HEAD"), timeout=25).status
+            code = urllib.request.urlopen(urllib.request.Request(u, method="HEAD", headers={"User-Agent": "Mozilla/5.0 (Macintosh) FLC-check-site"}), timeout=25).status
         except Exception as e:
             code = getattr(e, "code", "ERR")
         if code != 200: broken.append((r, code))

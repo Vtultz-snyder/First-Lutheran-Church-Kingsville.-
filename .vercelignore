@@ -1,0 +1,10 @@
+# Internal files. Never serve these publicly.
+CLAUDE.md
+check-site.sh
+deploy-cloudflare.sh
+wrangler.jsonc
+.assetsignore
+.cf-dist
+.shipstudio
+.git 2
+.env*

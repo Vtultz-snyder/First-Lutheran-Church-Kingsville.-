@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers static assets. No build step: this folder is already the compiled site.
+  "name": "first-lutheran-kingsville",
+  "compatibility_date": "2026-09-15",
+  "assets": {
+    "directory": ".cf-dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

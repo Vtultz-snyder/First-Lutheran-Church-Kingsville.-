@@ -69,16 +69,40 @@ as a tell that text was AI-written. `check-site.sh` fails the build if one appea
 
 ## Deploying
 
+Two hosts during the move. Both are plain static uploads, no build step.
+**Do not add a `vercel.json` with a `buildCommand`.** One existed with `next build`
+in it, and since there is no source to build, it failed every production deploy on 14 Aug.
+
 ```bash
 git add -A && git commit -m "..." && git push origin august-2026-update
-npx vercel deploy --prod --yes
+npx vercel deploy --prod --yes          # Vercel, current live preview
+./deploy-cloudflare.sh                  # Cloudflare, where the church domain is going
 ```
 
-Deploys are a plain static upload, no build step. **Do not add a `vercel.json`
-with a `buildCommand`.** One existed with `next build` in it, and since there is
-no source to build, it failed every production deploy on 14 Aug.
+Then check both, in a real browser:
 
-After deploying, run `./check-site.sh live` and confirm it is clean.
+```bash
+./check-site.sh live
+./check-site.sh https://first-lutheran-kingsville.victoria-tultz.workers.dev
+```
+
+### Cloudflare notes (set up 15 Sep 2026)
+
+- Worker `first-lutheran-kingsville` in Victoria's personal Cloudflare account
+  (victoria.tultz@gmail.com), same account as LEGACY. Static assets, free.
+- `deploy-cloudflare.sh` copies only the public site into `.cf-dist/` and uploads that.
+  Its excludes start with `/` so they match the top level only. An unanchored `app`
+  also strips `_next/static/chunks/app/`, which is every page's content. The pages still
+  load, look almost right, and check-site section 2 passes because the bundles never run.
+  The script now aborts if those bundles are missing.
+- Keep every `index.txt`. Next.js fetches them for page-to-page navigation.
+- Cloudflare returns 403 to `Python-urllib`. check-site.sh sends a browser User-Agent for
+  its link check. A wall of 403s means blocked, not broken.
+
+### Never publish internal files
+
+`.vercelignore` keeps this file, `check-site.sh`, the deploy script and `.env*` off
+Vercel. Until 15 Sep 2026 Vercel was serving this file publicly, phone number included.
 
 ## Sharing the link
 
@@ -105,4 +129,4 @@ have already caused confusion. Never append `/app/` to it, that path is a 404.
 - Confirm "Erie Migration District School" with Austin (he wrote "High School")
 - GYM grades 9-12 wording, pending Sue Nurse
 - Lunch ministry photos from Austin
-- DNS cutover to kingsvillelutheran.church, after the Board approves
+- DNS cutover: Board approved 9 Sep 2026. Move kingsvillelutheran.church nameservers from GoDaddy (ns33/ns34.domaincontrol.com) to Cloudflare on a call with Austin (his account, 2FA). Current records: apex A 185.230.63.107 (Wix), www CNAME pointing.wixdns.net, _dmarc TXT, no MX.
