@@ -71,18 +71,18 @@
     // Featured events, newest newsletter first. Each stays visible only until its date passes
     // (iso = YYYY-MM-DD). Add or update entries here; past ones drop off automatically.
     var FEATURED = [
-      { kicker: 'Worship together', title: 'Back to School Prayer Focus', iso: '2026-09-06',
-        dateLabel: 'Sunday, September 6 · 10:00 AM',
-        desc: 'We pray for students, teachers, and families as the new school year begins.',
-        link: '/calendar-events/#back-to-school-prayer', linkLabel: 'View church calendar' },
-      { kicker: 'Community event', title: 'Food for All Community Luncheon', iso: '2026-09-16',
-        dateLabel: 'Wednesday, September 16 · Roma Club, Leamington',
-        desc: 'The annual Southwestern Ontario Gleaners community luncheon. Tickets $15.00 online.',
-        link: '/calendar-events/#food-for-all-luncheon', linkLabel: 'See event details' },
-      { kicker: 'Worship together', title: 'VENVI Worship Service', iso: '2026-09-27',
-        dateLabel: 'Sunday, September 27 · 2:00 PM',
-        desc: 'A Sunday afternoon worship service at VENVI (Chartwell) Kingsville.',
-        link: '/calendar-events/#venvi-worship-september', linkLabel: 'View church calendar' }
+      { kicker: 'Worship together', title: 'Thanksgiving Worship', iso: '2026-10-11',
+        dateLabel: 'Sunday, October 11 · 10:00 AM',
+        desc: 'We celebrate God’s goodness and faithfulness, with Holy Communion. Thankful display items can be dropped off Saturday, October 10, 9:00-9:30 AM.',
+        link: '/calendar-events/#thanksgiving-worship', linkLabel: 'View church calendar' },
+      { kicker: 'Worship together', title: 'Reformation Sunday & Fellowship Lunch', iso: '2026-10-25',
+        dateLabel: 'Sunday, October 25 · 10:00 AM',
+        desc: 'We observe Reformation with Holy Communion, then stay for lunch together after the service.',
+        link: '/calendar-events/#reformation-sunday', linkLabel: 'View church calendar' },
+      { kicker: 'Community event', title: 'Halo-ween in Downtown Kingsville', iso: '2026-10-31',
+        dateLabel: 'Saturday, October 31 · 11:00 AM-1:00 PM',
+        desc: 'Join us downtown as we serve hotdogs to the community.',
+        link: '/calendar-events/#halo-ween-hotdogs', linkLabel: 'See event details' }
     ];
     var todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Toronto' });
     var upcoming = FEATURED.filter(function (ev) { return ev.iso >= todayStr; }).slice(0, 2);
