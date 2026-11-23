@@ -11,7 +11,7 @@ rm -rf .cf-dist
 rsync -a \
   --exclude "/.cf-dist" --exclude "/.git" --exclude "/.git 2" --exclude "/.vercel" --exclude "/.shipstudio" \
   --exclude "/node_modules" --exclude "/app" --exclude "/public" \
-  --exclude "/CLAUDE.md" --exclude "/check-site.sh" --exclude "/deploy-cloudflare.sh" \
+  --exclude "/CLAUDE.md" --exclude "/START-HERE.md" --exclude "/check-site.sh" --exclude "/deploy-cloudflare.sh" \
   --exclude "/wrangler.jsonc" --exclude "/.gitignore" --exclude "/.vercelignore" \
   --exclude ".env*" --exclude ".DS_Store" \
   ./ .cf-dist/

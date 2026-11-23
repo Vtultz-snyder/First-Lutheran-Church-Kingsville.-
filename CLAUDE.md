@@ -2,7 +2,7 @@
 
 Live: **https://kingsvillelutheran.church** (and www), on Cloudflare since 15 Sep 2026.
 Old preview, not yet retired: https://first-lutheran-kingsville.vercel.app
-Branch: `august-2026-update` (this is the real one, `main` is a dead June snapshot)
+Branch: `main`. (`archive-june-2026` is a dead pre-launch snapshot. Ignore it.)
 
 ## Read this before changing any text
 
@@ -99,7 +99,7 @@ Both are plain static uploads, no build step.
 in it, and since there is no source to build, it failed every production deploy on 14 Aug.
 
 ```bash
-git add -A && git commit -m "..." && git push origin august-2026-update
+git add -A && git commit -m "..." && git push origin main
 npx vercel deploy --prod --yes          # Vercel, current live preview
 ./deploy-cloudflare.sh                  # Cloudflare, serves kingsvillelutheran.church
 ```
