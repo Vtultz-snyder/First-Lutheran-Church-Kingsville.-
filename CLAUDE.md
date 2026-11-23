@@ -39,6 +39,29 @@ actually sees after React runs. If it says clean, the change really landed.
   Facebook links in the footer, and a mobile nav fix. Events with a past `iso`
   date drop off automatically.
 
+## Monthly newsletter routine
+
+Becky's newsletter arrives as a PDF each month. When asked to "do this month's
+newsletter", read the PDF and then:
+
+1. Rewrite `calendar-highlights-data.js`: `monthLabel`, `pageIntro`,
+   `featuredEventId`, and the whole `events` array. Every event needs an `end`
+   date (last day it stays visible) and an `image` that really exists under
+   `images/`, or the link check fails. Strings are single-quoted, so use a curly
+   apostrophe (’) inside them, never a plain one.
+2. Update the `FEATURED` array in `featured-events.js` (the "Coming up" banner),
+   soonest first, `iso` = the date it drops off. It shows the first two upcoming.
+3. If the newsletter contradicts standing page copy (service times, contacts,
+   paused programs), fix it in BOTH the HTML and the matching
+   `_next/static/chunks/app/**/page-*.js`.
+4. `./check-site.sh`, show the person the changes, deploy only when they say so,
+   then `./check-site.sh live`.
+
+The calendar page's month heading comes from today's date, not `monthLabel`, so it
+can say "November" over last month's expired events. Judge freshness from the data file.
+
+Editing this folder changes nothing public. Only the deploy step does.
+
 ## History timeline (About page)
 
 Photos live in the `p=[...]` array in the About bundle plus matching slides in
