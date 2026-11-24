@@ -80,7 +80,36 @@ for f in sorted(glob.glob(TMP + "/hyd-*.html")):
 print("   clean on all pages" if not bad else "")
 
 print("\n2. Does the HTML survive React? (edits made only in HTML get reverted)")
-IGNORE = re.compile(r"June|Zumba|Gleaners|SMART|Ladies Community Tea|Music Concert|All rights reserved|May and June", re.I)
+# A line that is in the served HTML but gone after React ran is only a problem
+# if React has never heard of it. That is the HTML-only-edit failure this whole
+# script exists to catch. If the text IS in the JS (a page bundle, or one of the
+# runtime data files), React knows it and deliberately did not render it, which
+# is how expired events and past calendar items are meant to behave. So: build
+# one haystack of every bit of JS the site ships, and forgive anything found in it.
+def js_haystack():
+    blob = []
+    for f in glob.glob("_next/static/chunks/**/*.js", recursive=True) + \
+             ["featured-events.js", "calendar-highlights-data.js", "calendar-highlights.js"]:
+        try:
+            blob.append(open(f, encoding="utf-8", errors="replace").read())
+        except OSError:
+            pass
+    return re.sub(r"\s+", " ", " ".join(blob))
+
+JS = js_haystack()
+
+def known_to_js(line):
+    # compare on letters and digits only: the bundle escapes quotes and dashes
+    # differently from the rendered HTML
+    key = re.sub(r"[^a-z0-9]+", "", line.lower())
+    return len(key) > 12 and key in KEYS
+
+KEYS = re.sub(r"[^a-z0-9]+", "", JS.lower())
+
+IGNORE = re.compile(r"All rights reserved", re.I)
+# A bare date line is rendered from a date value, so the formatted text never
+# appears in the JS literally. Never the content this check is protecting.
+DATEISH = re.compile(r"^[A-Z][a-z]+ \d{1,2},? \d{4}$")
 # /calendar-events/ rebuilds its whole listing at runtime from
 # calendar-highlights-data.js, so a pre/post diff there is meaningless.
 SKIP_DIFF = {"calendar-events"}
@@ -96,12 +125,13 @@ for f in sorted(glob.glob(TMP + "/hyd-*.html")):
         t = html.unescape(re.sub(r"<[^>]+>", "\n", t))
         return [l.strip() for l in t.split("\n") if l.strip()]
     a, b = lines(raw), set(lines(f))
-    lost = [x for x in a if x not in b and len(x) > 15 and not IGNORE.search(x)]
+    lost = [x for x in a if x not in b and len(x) > 15
+            and not IGNORE.search(x) and not DATEISH.match(x) and not known_to_js(x)]
     if lost:
         print(f"   FAIL {n}: {len(lost)} line(s) in the HTML vanish once React runs")
         for l in lost[:4]: print(f"        - {l[:110]}")
         fails.append(n)
-print("   (past events auto-hide, and /calendar-events/ rebuilds itself, so both are ignored)")
+print("   (text React knows about but hides, like expired events, is not a failure)")
 
 print("\n3. Links and images")
 refs = set()
